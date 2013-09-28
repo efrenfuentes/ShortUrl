@@ -4,3 +4,4 @@ source :rubyforge
 gem "sinatra"
 gem "haml"
 gem "redis"
+gem "sass"
