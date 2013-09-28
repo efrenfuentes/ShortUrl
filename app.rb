@@ -24,8 +24,9 @@ class ShortUrl < Sinatra::Base
     set :root, File.dirname(__FILE__)
     set :views, Proc.new { File.join(root, "views") }
     
-    ## conectarse a redis en localhost
-    @@redis = Redis.new
+    ## conectarse a redis
+    uri = URI.parse(ENV["REDISCLOUD_URL"])
+    @@redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
   
   get '/stylesheet/estilos.css' do
