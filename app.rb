@@ -1,11 +1,10 @@
 ## ShortUrl
 # - sencillo acortador de direcciones web
 
-## requires
-require 'sinatra'
-require 'haml'
-require 'sass'
-require 'redis'
+## Require la gema bundler gem y entonces llamar Bundler.require para cargar
+## todas las gemas listadas en Gemfile
+require 'bundler'
+Bundler.require
 
 ## ShortUrl aplicacion
 class ShortUrl < Sinatra::Base
@@ -25,7 +24,8 @@ class ShortUrl < Sinatra::Base
     set :views, Proc.new { File.join(root, "views") }
     
     ## conectarse a redis
-    uri = URI.parse(ENV["REDISCLOUD_URL"])
+    redis_url = ENV['REDISCLOUD_URL'] || ENV['REDIS_URL'] || "redis://localhost:6379"
+    uri = URI.parse(redis_url)
     @@redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
   
@@ -40,8 +40,10 @@ class ShortUrl < Sinatra::Base
   
   post '/' do
     if params[:url] and not params[:url].empty?
-      @codigo = cadena_aleatoria 5
-      @@redis.setnx "enlaces:#{@codigo}", params[:url]
+      codigo = cadena_aleatoria 5
+      @enlace = request.url + codigo
+      puts params[:url]
+      @@redis.setnx "enlaces:#{codigo}", params[:url]
     end
     haml :index
   end

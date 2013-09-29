@@ -2,7 +2,7 @@
 	%input{:type => 'text', :id => 'url', :name => 'url', :size => 100}
 	%input{:type => 'submit', :value => 'Acortar', :id => 'submit'}
 .clear
-- if @codigo
+- if @enlace
 	.resultado
 		Su URL recortada es:
-		%a{:href => "http://su.efrenfuentes.net/#{@codigo}"} http://su.efrenfuentes.net/#{@codigo}
+		%a{:href => "#{@enlace}"} #{@enlace}
