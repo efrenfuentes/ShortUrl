@@ -1,0 +1,26 @@
+<div class="row estilo-row">
+	<div class="col-md-6 col-md-offset-3">
+		<h1 class="estilo-h1"><img src="images/icons/svg/clipboard.svg" alt="Clipboard"> ShortUrl</h1>
+	</div>
+</div>
+
+<div class="row estilo-row">
+	<form action='/' method='post' class="form-inline" role="form">
+		<div class="form-group col-lg-9">
+		    <label class="sr-only" for="url">Url</label>
+		    <input id='url' name='url' type='text' class="form-control" placeholder="Url">
+		</div>
+		<div class="col-lg-3">
+			<input id='submit' type='submit' value='Acortar' class="btn btn-block btn-primary">
+		</div>
+	</form>
+</div>
+
+<% if @enlace %>
+	<div class="row">
+		<div class='alert alert-success'>
+		    <p>Su URL recortada es:
+		    <a href='<%= @enlace %>'><%= @enlace %></a></p>
+		</div>
+	</div>
+<% end %>

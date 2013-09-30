@@ -29,13 +29,8 @@ class ShortUrl < Sinatra::Base
     @@redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
   
-  get '/stylesheet/estilos.css' do
-    content_type 'text/css'
-    sass :estilos
-  end
-  
   get '/' do
-    haml :index
+    erb :index
   end
   
   post '/' do
@@ -45,7 +40,7 @@ class ShortUrl < Sinatra::Base
       puts params[:url]
       @@redis.setnx "enlaces:#{codigo}", params[:url]
     end
-    haml :index
+    erb :index
   end
   
   get '/:codigo' do

@@ -1,12 +1,9 @@
 GEM
   specs:
-    haml (4.0.3)
-      tilt
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
     redis (3.0.4)
-    sass (3.2.10)
     sinatra (1.4.3)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -17,7 +14,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  haml
   redis
-  sass
   sinatra
